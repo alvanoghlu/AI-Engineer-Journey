@@ -8,5 +8,5 @@ def find_highest_grade(grades):
 
 result = find_highest_grade(grades)
 
-print("The highest grades is:", result)
+print("The highest grade is:", result)
 
