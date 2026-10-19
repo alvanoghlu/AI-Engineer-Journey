@@ -4,4 +4,4 @@ for grade in grades:
     total += grade
 average = float(total / len(grades))
 
-print("Average grade:", average)
+print("Average grade:", round(average,2))
