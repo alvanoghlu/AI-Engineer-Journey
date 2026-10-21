@@ -1,24 +1,25 @@
 
-class Student:
-    def __init__(self, name, grades):
-        self.name = name
-        self.grades = grades
+from dataclasses import dataclass
 
-    def average(self):
+
+@dataclass
+class Student:
+    name: str
+    grades: list[int]
+
+    def average(self) -> float:
         if not self.grades:
             raise ValueError("no grades")
 
-        total = 0
-        for grade in self.grades:
-            total += grade
-
-        return total / len(self.grades)
+        return sum(self.grades) / len(self.grades)
 
 
-ali = Student("Ali", [70, 85, 90])
-leyla = Student("Leyla", [90, 95, 100])
-murad = Student("Murad", [60, 70, 80])
+if __name__ == "__main__":
+    student1 = Student("Ali", [70, 90])
+    student2 = Student("Ali", [70])
+    student3 = Student("Ali", [70])
 
-print(ali.name, ali.average())
-print(leyla.name, leyla.average())
-print(murad.name, murad.average())
+    print(student1)
+    print(student2 == student3)
+    print("Average:", student1.average())
+  
