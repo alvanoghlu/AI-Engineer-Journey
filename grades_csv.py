@@ -1,3 +1,23 @@
+class DataError(Exception):
+    pass
+
+def parse_row(row: dict, line_number: int) -> dict:
+    try:
+        grade = int(row["grade"])
+    except ValueError as e:
+        raise DataError(
+            f"bad grade in row {line_number}: {row['grade']}"
+        ) from e
+
+    if not 0 <= grade <= 100:
+        raise DataError(
+            f"bad grade in row {line_number}: {grade}"
+        )
+
+    row["grade"] = grade
+    return row
+
+print(parse_row({"name": "Ali", "grade": "85"}, 2))
 
 import csv
 import json
@@ -9,30 +29,29 @@ from grades_utils import calculate_average
 # Read and clean CSV data
 def load_grades(path: Path) -> list[dict]:
     valid_rows = []
+    loaded = 0
     skipped = 0
 
     with path.open(encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
 
-        for row in reader:
+        for line_number, row in enumerate(reader, start=2):
             try:
-                grade = int(row["grade"])
+                parsed_row = parse_row(row, line_number)
 
-            except ValueError:
+                valid_rows.append({
+                    "name": parsed_row["name"],
+                    "subject": parsed_row["subject"],
+                    "grade": parsed_row["grade"]
+                })
+
+                loaded += 1
+
+            except DataError as e:
+                print(f"Skipped row {line_number}: {e}")
                 skipped += 1
-                continue
 
-            if not 0 <= grade <= 100:
-                skipped += 1
-                continue
-
-            valid_rows.append({
-                "name": row["name"],
-                "subject": row["subject"],
-                "grade": grade
-            })
-
-    print(f"Skipped {skipped} rows")
+    print(f"Loaded {loaded} rows, skipped {skipped}")
     return valid_rows
 
 
