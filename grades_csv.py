@@ -18,7 +18,6 @@ def parse_row(row: dict, line_number: int) -> dict:
     row["grade"] = grade
     return row
 
-print(parse_row({"name": "Ali", "grade": "85"}, 2))
 
 import csv
 import json
@@ -65,14 +64,13 @@ def load_grades(path: Path) -> list[dict]:
 
 
 # Main program
-if __name__ == "__main__":
-
+def main() -> None:
     logging.basicConfig(
-    level=logging.INFO,
-    filename="app.log",
-    encoding="utf-8",
-    format="%(asctime)s %(levelname)s %(message)s"
-)
+        level=logging.INFO,
+        filename="app.log",
+        encoding="utf-8",
+        format="%(asctime)s %(levelname)s %(message)s"
+    )
 
     # File paths
     folder = Path(__file__).parent
@@ -121,3 +119,6 @@ if __name__ == "__main__":
             )
 
         print("Results exported successfully!")
+
+if __name__ == "__main__":
+    main()
