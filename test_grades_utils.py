@@ -4,6 +4,17 @@ import pytest
 from grades_utils import calculate_average, find_highest_grade
 
 
+@pytest.mark.parametrize("grades, expected", [
+    ([70, 90], 80),
+    ([100], 100),
+    ([50, 60, 70], 60),
+    ([0, 80], 40),
+])
+def test_calculate_average(grades, expected):
+    assert calculate_average(grades) == expected
+
+
+
 # 1. Normal list
 def test_average_normal():
     result = calculate_average([70, 85, 90])
