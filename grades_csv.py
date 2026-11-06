@@ -1,3 +1,4 @@
+import logging
 class DataError(Exception):
     pass
 
@@ -48,15 +49,30 @@ def load_grades(path: Path) -> list[dict]:
                 loaded += 1
 
             except DataError as e:
-                print(f"Skipped row {line_number}: {e}")
+                logging.warning(
+                    "skipped row %s: %s", line_number, e
+                )
                 skipped += 1
 
     print(f"Loaded {loaded} rows, skipped {skipped}")
+    logging.info(
+        "loaded %s rows, skipped %s",
+        loaded,
+        skipped
+        )
+    
     return valid_rows
 
 
 # Main program
 if __name__ == "__main__":
+
+    logging.basicConfig(
+    level=logging.INFO,
+    filename="app.log",
+    encoding="utf-8",
+    format="%(asctime)s %(levelname)s %(message)s"
+)
 
     # File paths
     folder = Path(__file__).parent
@@ -67,8 +83,9 @@ if __name__ == "__main__":
     try:
         grades = load_grades(csv_path)
 
-    except FileNotFoundError:
-        print("CSV file not found!")
+    except FileNotFoundError as e:
+        logging.error("file not found: %s", e)
+        print("CSV file not found. Please check the file path.")
 
     else:
         # Group grades by student name
