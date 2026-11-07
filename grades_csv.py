@@ -7,7 +7,9 @@ class DataError(Exception):
     pass
 
 
-def parse_row(row: dict, line_number: int) -> dict:
+def parse_row(
+    row: dict[str, str | int], line_number: int
+) -> dict[str, str | int]:
     try:
         grade = int(row["grade"])
     except ValueError as e:
@@ -28,7 +30,7 @@ from grades_utils import calculate_average
 
 
 # Read and clean CSV data
-def load_grades(path: Path) -> list[dict]:
+def load_grades(path: Path) -> list[dict[str, str | int]]:
     valid_rows = []
     loaded = 0
     skipped = 0

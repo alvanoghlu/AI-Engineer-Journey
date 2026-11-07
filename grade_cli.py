@@ -25,8 +25,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     return parser
 
-
-def group_by_name(rows: list[dict]) -> dict[str, list[int]]:
+def group_by_name(
+    rows: list[dict[str, str | int]],
+) -> dict[str, list[int]]:
     grades_by_name = {}
 
     for row in rows:
@@ -41,7 +42,7 @@ def group_by_name(rows: list[dict]) -> dict[str, list[int]]:
     return grades_by_name
 
 
-def show_average(rows: list[dict]) -> None:
+def show_average(rows: list[dict[str, str | int]]) -> None:
     grades_by_name = group_by_name(rows)
 
     for name, grades in grades_by_name.items():
@@ -49,7 +50,7 @@ def show_average(rows: list[dict]) -> None:
         print(f"{name}: {average}")
 
 
-def show_top(rows: list[dict]) -> None:
+def show_top(rows: list[dict[str, str | int]]) -> None:
     grades_by_name = group_by_name(rows)
 
     if not grades_by_name:
@@ -67,7 +68,7 @@ def show_top(rows: list[dict]) -> None:
     print(f"Average grade: {averages[top_student]}")
 
 
-def show_summary(rows: list[dict]) -> None:
+def show_summary(rows: list[dict[str, str | int]]) -> None:
     grades_by_name = group_by_name(rows)
 
     if not rows:
