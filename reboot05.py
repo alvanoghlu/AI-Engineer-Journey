@@ -1,4 +1,3 @@
-
 import requests
 
 url = "https://jsonplaceholder.typicode.com/users"
@@ -17,7 +16,7 @@ except requests.exceptions.RequestException as error:
 
 response = requests.get(url)
 
-print("Status Code:",response.status_code)
+print("Status Code:", response.status_code)
 
 users = response.json()
 

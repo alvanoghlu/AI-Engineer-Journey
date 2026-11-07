@@ -1,18 +1,19 @@
-
 import pytest
 
 from grades_utils import calculate_average, find_highest_grade
 
 
-@pytest.mark.parametrize("grades, expected", [
-    ([70, 90], 80),
-    ([100], 100),
-    ([50, 60, 70], 60),
-    ([0, 80], 40),
-])
+@pytest.mark.parametrize(
+    "grades, expected",
+    [
+        ([70, 90], 80),
+        ([100], 100),
+        ([50, 60, 70], 60),
+        ([0, 80], 40),
+    ],
+)
 def test_calculate_average(grades, expected):
     assert calculate_average(grades) == expected
-
 
 
 # 1. Normal list
@@ -63,7 +64,3 @@ def test_average_equal():
 
 def test_highest_equal():
     assert find_highest_grade([80, 80, 80]) == 80
-
-def test_highest_normal():
-    result = find_highest_grade([70, 85, 90])
-    assert result == 90

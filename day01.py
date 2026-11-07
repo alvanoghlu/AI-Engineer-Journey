@@ -1,7 +1,7 @@
 products = [
     {"name": "Laptop", "price": 1500, "quantity": 2},
     {"name": "Mouse", "price": 35, "quantity": 5},
-    {"name": "Keyboard", "price": 80, "quantity": 3}
+    {"name": "Keyboard", "price": 80, "quantity": 3},
 ]
 
 print(products[0]["name"])

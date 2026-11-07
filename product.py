@@ -1,4 +1,3 @@
-
 from dataclasses import dataclass
 
 
@@ -29,7 +28,7 @@ if __name__ == "__main__":
     products = [
         Product("Laptop", 1200.0, 2),
         Product("Mouse", 25.0, 3),
-        Product("Keyboard", 60.0, 2)
+        Product("Keyboard", 60.0, 2),
     ]
 
     for product in products:

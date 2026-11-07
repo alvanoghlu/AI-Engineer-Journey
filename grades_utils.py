@@ -1,4 +1,3 @@
-
 def calculate_average(grades: list[int]) -> float:
     # In empty list, raise a ValueError
     if len(grades) == 0:
@@ -11,6 +10,7 @@ def calculate_average(grades: list[int]) -> float:
 
     return total / len(grades)
 
+
 def find_highest_grade(grades: list[int]) -> int:
     # In empty list, raise a ValueError
     if len(grades) == 0:
@@ -19,7 +19,6 @@ def find_highest_grade(grades: list[int]) -> int:
     highest_grade = grades[0]
 
     for grade in grades:
-        if grade > highest_grade:
-            highest_grade = grade
+        highest_grade = max(highest_grade, grade)
 
     return highest_grade

@@ -1,9 +1,9 @@
 import json
 
-
 # JSON READING
 with open("students.json", "r", encoding="utf-8") as f:
     students = json.load(f)
+
 
 # Calculate the average of grades for each student
 def calculate_average(grades):

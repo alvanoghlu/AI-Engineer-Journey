@@ -1,8 +1,9 @@
 import argparse
-from pathlib import Path
 import sys
-from grades_utils import calculate_average
+from pathlib import Path
+
 from grades_csv import load_grades
+from grades_utils import calculate_average
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -13,17 +14,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "command",
         choices=["average", "top", "summary"],
-        help="Choose the operation to run"
+        help="Choose the operation to run",
     )
 
     parser.add_argument(
         "--file",
         default=Path(__file__).parent / "grades.csv",
-        help="Path to the grades CSV file"
+        help="Path to the grades CSV file",
     )
 
     return parser
-
 
 
 def group_by_name(rows: list[dict]) -> dict[str, list[int]]:
@@ -40,12 +40,14 @@ def group_by_name(rows: list[dict]) -> dict[str, list[int]]:
 
     return grades_by_name
 
+
 def show_average(rows: list[dict]) -> None:
     grades_by_name = group_by_name(rows)
 
     for name, grades in grades_by_name.items():
         average = calculate_average(grades)
         print(f"{name}: {average}")
+
 
 def show_top(rows: list[dict]) -> None:
     grades_by_name = group_by_name(rows)
@@ -64,6 +66,7 @@ def show_top(rows: list[dict]) -> None:
     print(f"Top student: {top_student}")
     print(f"Average grade: {averages[top_student]}")
 
+
 def show_summary(rows: list[dict]) -> None:
     grades_by_name = group_by_name(rows)
 
@@ -78,6 +81,7 @@ def show_summary(rows: list[dict]) -> None:
     print(f"Total students: {len(grades_by_name)}")
     print(f"Total grades: {len(rows)}")
     print(f"Overall average: {overall_average}")
+
 
 def main() -> None:
     args = build_parser().parse_args()
@@ -99,6 +103,7 @@ def main() -> None:
 
     elif args.command == "summary":
         show_summary(rows)
+
 
 if __name__ == "__main__":
     main()

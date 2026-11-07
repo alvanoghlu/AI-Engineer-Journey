@@ -1,4 +1,3 @@
-
 from student import Student
 
 
@@ -28,4 +27,3 @@ class StudentGroup:
             raise ValueError("no students with grades")
 
         return best
-  

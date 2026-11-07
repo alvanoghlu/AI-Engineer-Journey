@@ -1,8 +1,7 @@
-
 students = [
     {"name": "Ali", "grades": [70, 85, 90]},
     {"name": "Aysel", "grades": [90, 95, 100]},
-    {"name": "Murad", "grades": [80, 75, 85]}
+    {"name": "Murad", "grades": [80, 75, 85]},
 ]
 
 

@@ -1,4 +1,3 @@
-
 from dataclasses import dataclass
 
 
@@ -22,4 +21,3 @@ if __name__ == "__main__":
     print(student1)
     print(student2 == student3)
     print("Average:", student1.average())
-  

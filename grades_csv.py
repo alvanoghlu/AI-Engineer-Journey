@@ -1,19 +1,20 @@
 import logging
+
+logger = logging.getLogger(__name__)
+
+
 class DataError(Exception):
     pass
+
 
 def parse_row(row: dict, line_number: int) -> dict:
     try:
         grade = int(row["grade"])
     except ValueError as e:
-        raise DataError(
-            f"bad grade in row {line_number}: {row['grade']}"
-        ) from e
+        raise DataError(f"bad grade in row {line_number}: {row['grade']}") from e
 
     if not 0 <= grade <= 100:
-        raise DataError(
-            f"bad grade in row {line_number}: {grade}"
-        )
+        raise DataError(f"bad grade in row {line_number}: {grade}")
 
     row["grade"] = grade
     return row
@@ -39,27 +40,23 @@ def load_grades(path: Path) -> list[dict]:
             try:
                 parsed_row = parse_row(row, line_number)
 
-                valid_rows.append({
-                    "name": parsed_row["name"],
-                    "subject": parsed_row["subject"],
-                    "grade": parsed_row["grade"]
-                })
+                valid_rows.append(
+                    {
+                        "name": parsed_row["name"],
+                        "subject": parsed_row["subject"],
+                        "grade": parsed_row["grade"],
+                    }
+                )
 
                 loaded += 1
 
             except DataError as e:
-                logging.warning(
-                    "skipped row %s: %s", line_number, e
-                )
+                logger.warning("skipped row %s: %s", line_number, e)
                 skipped += 1
 
     print(f"Loaded {loaded} rows, skipped {skipped}")
-    logging.info(
-        "loaded %s rows, skipped %s",
-        loaded,
-        skipped
-        )
-    
+    logger.info("loaded %s rows, skipped %s", loaded, skipped)
+
     return valid_rows
 
 
@@ -69,7 +66,7 @@ def main() -> None:
         level=logging.INFO,
         filename="app.log",
         encoding="utf-8",
-        format="%(asctime)s %(levelname)s %(message)s"
+        format="%(asctime)s %(levelname)s %(message)s",
     )
 
     # File paths
@@ -82,7 +79,7 @@ def main() -> None:
         grades = load_grades(csv_path)
 
     except FileNotFoundError as e:
-        logging.error("file not found: %s", e)
+        logger.error("file not found: %s", e)
         print("CSV file not found. Please check the file path.")
 
     else:
@@ -104,21 +101,14 @@ def main() -> None:
         for name, student_grades in grades_by_name.items():
             average = calculate_average(student_grades)
 
-            result.append({
-                "name": name,
-                "average": average
-            })
+            result.append({"name": name, "average": average})
 
         # Export results to JSON
         with output_path.open("w", encoding="utf-8") as f:
-            json.dump(
-                result,
-                f,
-                indent=2,
-                ensure_ascii=False
-            )
+            json.dump(result, f, indent=2, ensure_ascii=False)
 
         print("Results exported successfully!")
+
 
 if __name__ == "__main__":
     main()

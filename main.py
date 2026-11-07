@@ -1,9 +1,7 @@
-
 import json
 
 from student import Student
 from student_group import StudentGroup
-
 
 # Read students from JSON
 with open("students.json", encoding="utf-8") as f:
@@ -34,13 +32,8 @@ print("Best student:", best.name)
 
 
 # Compare with max() and lambda
-valid_students = [
-    s for s in group.students if s.grades
-]
+valid_students = [s for s in group.students if s.grades]
 
-best_with_max = max(
-    valid_students,
-    key=lambda s: s.average()
-)
+best_with_max = max(valid_students, key=lambda s: s.average())
 
 print("Best with max:", best_with_max.name)
