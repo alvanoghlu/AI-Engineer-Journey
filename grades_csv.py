@@ -86,11 +86,11 @@ def main() -> None:
 
     else:
         # Group grades by student name
-        grades_by_name = {}
+        grades_by_name: dict[str, list[int]] = {}
 
         for student in grades:
-            name = student["name"]
-            grade = student["grade"]
+            name = str(student["name"])
+            grade = int(student["grade"])
 
             if name not in grades_by_name:
                 grades_by_name[name] = []

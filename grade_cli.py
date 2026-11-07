@@ -28,11 +28,11 @@ def build_parser() -> argparse.ArgumentParser:
 def group_by_name(
     rows: list[dict[str, str | int]],
 ) -> dict[str, list[int]]:
-    grades_by_name = {}
+    grades_by_name: dict[str, list[int]] = {}
 
     for row in rows:
-        name = row["name"]
-        grade = row["grade"]
+        name = str(row["name"])
+        grade = int(row["grade"])
 
         if name not in grades_by_name:
             grades_by_name[name] = []
@@ -62,7 +62,7 @@ def show_top(rows: list[dict[str, str | int]]) -> None:
     for name, grades in grades_by_name.items():
         averages[name] = calculate_average(grades)
 
-    top_student = max(averages, key=averages.get)
+    top_student = max(averages, key=lambda name: averages[name])
 
     print(f"Top student: {top_student}")
     print(f"Average grade: {averages[top_student]}")
@@ -75,7 +75,7 @@ def show_summary(rows: list[dict[str, str | int]]) -> None:
         print("No student data found")
         return
 
-    all_grades = [row["grade"] for row in rows]
+    all_grades = [int(row["grade"]) for row in rows]
 
     overall_average = calculate_average(all_grades)
 
