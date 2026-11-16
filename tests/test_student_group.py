@@ -1,4 +1,3 @@
-import json
 
 import pytest
 
@@ -9,11 +8,14 @@ from student_group import StudentGroup
 def test_best_student():
     group = StudentGroup()
 
-    with open("students.json", encoding="utf-8") as f:
-        data = json.load(f)
+    students = [
+        Student("Aysel", [90, 95, 100]),
+        Student("Ali", [70, 80, 85]),
+        Student("Leyla", [60, 75, 80]),
+    ]
 
-    for d in data:
-        group.add(Student(d["name"], d["grades"]))
+    for student in students:
+        group.add(student)
 
     assert group.best_student().name == "Aysel"
 

@@ -19,7 +19,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     parser.add_argument(
         "--file",
-        default=Path(__file__).parent / "grades.csv",
+        default=Path(__file__).parent.parent / "data" / "grades.csv",
         help="Path to the grades CSV file",
     )
 
