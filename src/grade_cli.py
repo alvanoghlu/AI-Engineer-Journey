@@ -25,6 +25,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     return parser
 
+
 def group_by_name(
     rows: list[dict[str, str | int]],
 ) -> dict[str, list[int]]:

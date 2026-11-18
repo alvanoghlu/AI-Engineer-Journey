@@ -7,9 +7,7 @@ class DataError(Exception):
     pass
 
 
-def parse_row(
-    row: dict[str, str | int], line_number: int
-) -> dict[str, str | int]:
+def parse_row(row: dict[str, str | int], line_number: int) -> dict[str, str | int]:
     try:
         grade = int(row["grade"])
     except ValueError as e:

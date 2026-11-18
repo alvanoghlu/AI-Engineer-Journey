@@ -2,7 +2,7 @@ from grade_cli import build_parser, group_by_name
 
 
 def test_group_by_name() -> None:
-    rows : list[dict[str, str | int]] = [
+    rows: list[dict[str, str | int]] = [
         {"name": "Ali", "grade": 80},
         {"name": "Ali", "grade": 90},
         {"name": "Murad", "grade": 70},
