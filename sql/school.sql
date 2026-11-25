@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS grades, students;
+DROP TABLE IF EXISTS grades;
+DROP TABLE IF EXISTS students;
 
 CREATE TABLE students (
     id SERIAL PRIMARY KEY,
